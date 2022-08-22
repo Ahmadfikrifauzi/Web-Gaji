@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaji Apps</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <header>
+        <h1>Gaji Apps</h1>
+    </header>
+
+    <main>
+        <section id="input">
+            <h2>Masukan Data Pegawai</h2>
+            <form>
+                <div class="inputName flex">
+                    <label for="nama">Nama</label>
+                    <input type="text" id="nama" required>
+                </div>
+
+                <div class="inputPekerjaan flex">
+                    <label for="pekerjaan">Jenis Pekerjaan</label>
+                    <input type="text" id="pekerjaan" required>
+                </div>
+
+                <div class="inputLokasi flex">
+                    <label for="lokasi">Lokasi</label>
+                    <input type="text" id="lokasi" required>
+                </div>
+
+                <div class="inputGaji flex">
+                    <label for="gaji">Gaji Perhari</label>
+                    <input type="number" id="gaji" required >
+                </div>
+                <button type="submit">Kirim Data Pegawai</button>
+            </form>
+        </section>
+
+        <section id="daftarPegawai">
+            <h2>Data Pegawai</h2>
+            <table class="demo">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Lokasi</th>
+                        <th>Jenis Pekerjaan</th>
+                        <th>Gaji Perhari</th>
+                        <th colspan="3">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="gajian">
+            <h2>Gajian</h2>
+            <table class="demo">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <TH>Masuk</TH>
+                        <th>Gaji Yang Diterima</th>
+                        <th colspan="3">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

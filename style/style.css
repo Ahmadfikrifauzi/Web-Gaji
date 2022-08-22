@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #3AB4F2;
+    text-align: center;
+    padding: 10PX;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+main section{
+    margin:20px auto;
+    width: 60%;
+    border: 1px solid black;
+    line-height: 20px;
+    border-radius: 10px;
+}
+
+main section h2 {
+    padding: 10px 0;
+    text-align: center;
+}
+
+
+
+main #input form .flex{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+main #input form{
+    padding: 20px;
+}
+
+main #input form button{
+    width: 100%;
+    padding: 10px;
+}
+
+main #input div input{
+    border: none;
+    height: 25px;
+    border-bottom: 1px solid black;
+}
+
+main #input div input:focus{
+    outline: none; 
+}
+
+main #input div input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+main #daftarPegawai{
+    padding: 30px 10px ;
+}
+
+.demo {
+    width: 100%;
+    border-collapse:collapse;
+    padding:10px;
+}
+.demo th {
+    padding:5px;
+    background:#F0F0F0;
+}
+.demo td {
+    padding:10px;
+    text-align: center;
+}
+
+.demo td button{
+    padding: 5px;
+    margin: 10px 10px;
+    border-radius: 10%;
+    border: 0.2px solid black ;
+}
