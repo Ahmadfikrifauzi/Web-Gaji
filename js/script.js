@@ -2,13 +2,9 @@ const dataPegawai = []
 const RENDER_DATA = 'render-data'
 const STORAGEKEY = 'data-pegawai'
 
-
-
-
-saveLocalStorage = () => {
+saveLocalStorage = () => {      // Untuk MengesaveData ke LocalStorage
     if (localStorage != undefined) {
         const parsed = JSON.stringify(dataPegawai)
-        console.log(parsed)
         localStorage.setItem(STORAGEKEY, parsed)
         document.dispatchEvent(new Event(RENDER_DATA))
     } else {
@@ -16,7 +12,7 @@ saveLocalStorage = () => {
     }
 }
 
-loadData = () => {
+loadData = () => {              // unutk meLoad Data
     const serializeData = localStorage.getItem(STORAGEKEY)
     let data = JSON.parse(serializeData)
 
@@ -28,15 +24,12 @@ loadData = () => {
     }
 }
 
-
-
-no = () => {
+no = () => {                    //Untuk Mengambil Nomor index array
     let nomor =dataPegawai.length
     return ++nomor
 }
 
-
-menampungData = (no,nama,jenisPekerjaan,lokasi,gajiPerhari,absen,gajian) => {
+menampungData = (no,nama,jenisPekerjaan,lokasi,gajiPerhari,absen,gajian) => {   //Untuk Menampung Data
     return {
         no,
         nama,
@@ -48,7 +41,7 @@ menampungData = (no,nama,jenisPekerjaan,lokasi,gajiPerhari,absen,gajian) => {
     }
 }
 
-tambahData = () => {
+tambahData = () => {        // Untuk Menambah Data
     const nama = document.getElementById('nama').value
     const pekerjaan = document.getElementById('pekerjaan').value
     const lokasi = document.getElementById('lokasi').value
@@ -56,7 +49,6 @@ tambahData = () => {
     const nomor = no()
     const data = menampungData(nomor, nama, pekerjaan, lokasi, gaji,0,0)
     dataPegawai.push(data)
-  
 
     document.dispatchEvent(new Event(RENDER_DATA))
     saveLocalStorage()
@@ -64,7 +56,7 @@ tambahData = () => {
 
 }
 
-menampilkanDataPegawai = (dataPegawai) => {
+menampilkanDataPegawai = (dataPegawai) => {     //Menampilkan Data
     const tr = document.createElement('tr')
 
     const tdNomor = document.createElement('td')
@@ -94,18 +86,24 @@ menampilkanDataPegawai = (dataPegawai) => {
     masuk.append(btnMasuk)
 
 
-    const setengahHari = document.createElement('td')
-    const btnSetengahHari = document.createElement('button')
-    btnSetengahHari.setAttribute('type', 'submit')
-    btnSetengahHari.innerText= 'Setengah Hari'
-    setengahHari.append(btnSetengahHari)
+    const hapus = document.createElement('td')
+    const btnHapus = document.createElement('button')
+    btnHapus.setAttribute('type', 'submit')
+    btnHapus.innerText = 'Hapus'
+    btnHapus.addEventListener('click', () => {
+        hapusDataPegawai(dataPegawai.no)
+    })
+    hapus.append(btnHapus)
 
 
-    const tidakMasuk = document.createElement('td')
-    const btnTidakMasuk = document.createElement('button')
-    btnTidakMasuk.setAttribute('type', 'submit')
-    btnTidakMasuk.innerText= 'Tidak Masuk'
-    tidakMasuk.append(btnTidakMasuk)
+    const edit = document.createElement('td')
+    const btnEdit = document.createElement('button')
+    btnEdit.setAttribute('type', 'submit')
+    btnEdit.innerText = 'Edit'
+    btnEdit.addEventListener('click', () => {
+        editData(dataPegawai.no)
+    })
+    edit.append(btnEdit)
 
     
     tr.append(
@@ -115,8 +113,8 @@ menampilkanDataPegawai = (dataPegawai) => {
         tdJenisPekerjaan,
         tdGajiPerhari,
         masuk,
-        setengahHari,
-        tidakMasuk)
+        hapus,
+        edit)
     
     return tr
 }
@@ -166,14 +164,58 @@ hitungGaji = (nomor) => {
             gaji.absen = 0
         }
         gaji.gajian = gaji.gajiPerhari * gaji.absen
-        console.log(gaji.gajian)
     }
     saveLocalStorage()
     document.dispatchEvent(new Event(RENDER_DATA))
 }
 
+findIndex = (nomor) => {
+    for (const pegawai of dataPegawai) {
+        if (pegawai.no === nomor) {
+            return pegawai
+        }
+    }
+}
 
+mengurutArray = () => {
+    for (dataIndex in dataPegawai) {
+        for (let i = 0; i <= dataIndex; i++){
+            dataPegawai[i].no =  i+1
+        }
+    }
+}
 
+hapusDataPegawai = (nomor) => {
+    const pegawai = findIndex(nomor)
+    if (pegawai === -1) return
+    
+    let index = pegawai.no - 1
+
+    dataPegawai.splice(index, 1)
+    
+    mengurutArray()
+    
+    document.dispatchEvent(new Event(RENDER_DATA))
+    saveLocalStorage()
+}
+
+editData = (nomor) => {
+    const data = findIndex(nomor)
+    const input = document.querySelectorAll('input')
+
+    input[0].value = data.nama
+    input[1].value = data.jenisPekerjaan
+    input[2].value = data.lokasi
+    input[3].value = data.gajiPerhari
+    const submit = document.querySelector('#input button')
+    submit.addEventListener('click', () => {
+        console.log('oke')
+    })
+
+    dataPegawai.splice(nomor - 1, 1)
+    mengurutArray()
+    
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const kirimDataPegawai = document.getElementById('input')
@@ -186,7 +228,6 @@ document.addEventListener("DOMContentLoaded", () => {
         loadData()
     }
 })
-
 
 document.addEventListener(RENDER_DATA, () => {
     const table = document.querySelectorAll('tbody')
