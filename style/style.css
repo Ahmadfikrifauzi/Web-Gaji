@@ -81,3 +81,18 @@ main #daftarPegawai{
     border-radius: 10%;
     border: 0.2px solid black ;
 }
+
+
+@media screen and (max-width: 844px){
+    main section {
+        width: 100%;
+    }
+
+    main #daftarPegawai .demo {
+        font-size: 10px;
+    }
+    main #daftarPegawai .demo button{
+        font-size: 10px;
+        margin: 0;
+    }
+}
